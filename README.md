@@ -7,14 +7,18 @@
 
 ### 版本说明
 本项目分为两个版本，源码相同，只是在发布时，我会更换 `react` 及 `react-dom` 相应的版本，再进行发布
-- React15: [`awesome-react15-swiper`](`https://www.npmjs.com/package/awesome-react15-swiper`)
-- React16: [`awesome-react16-swiper`](`https://www.npmjs.com/package/awesome-react16-swiper`)
+- React15: <a href="https://www.npmjs.com/package/awesome-react15-swiper" target="_blank">awesome-react15-swiper</a>
+- React16: <a href="https://www.npmjs.com/package/awesome-react16-swiper" target="_blank">awesome-react16-swiper</a>
 
 ### 本地开发
 ```bash
 yarn
 npm run start
 ```
+
+### 安装
+- React15: `npm install awesome-react15-swiper`
+- React16: `npm install awesome-react16-swiper`
 
 ### 使用
 ```bash
