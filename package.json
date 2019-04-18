@@ -1,5 +1,5 @@
 {
-  "name": "awesome-react16-swiper",
+  "name": "awesome-react15-swiper",
   "version": "1.0.1",
   "description": "An Awesome React Swiper",
   "author": "johnsonhou",
@@ -31,12 +31,12 @@
     "build": "npm run clean && webpack --inline --progress --config config/webpack.config.prod.js"
   },
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
   },
   "dependencies": {
-    "react": "16.0.0",
-    "react-dom": "16.0.0"
+    "react": "15.0.0",
+    "react-dom": "15.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
