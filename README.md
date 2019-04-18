@@ -7,6 +7,7 @@
 
 ### 版本说明
 本项目分为两个版本，源码相同，只是在发布时，我会更换 `react` 及 `react-dom` 相应的版本，再进行发布
+*特别需要注意的地方：安装的时候最好指定版本安装，比如 `npm install awesome-react15-swiper@v1.0.1-react15`，因为我是同一套代码发布2个release，2个tag，用的是版本号区分*
 - React15：
   - 链接：<a href="https://www.npmjs.com/package/awesome-react15-swiper" target="_blank">awesome-react15-swiper</a>
   - 安装：`npm install awesome-react15-swiper`
