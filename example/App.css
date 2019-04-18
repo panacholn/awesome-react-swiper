@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+}
+
+.wdt-swiper {
+  height: 160px;
+}
+
+.wdt-swiper-slide > div {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
+}
+
+.one {
+  background-color: red;
+}
+.two {
+  background-color: blue;
+}
+.three {
+  background-color: green;
+}
