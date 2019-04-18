@@ -7,8 +7,8 @@
 
 ### 版本说明
 本项目分为两个版本，源码相同，只是在发布时，我会更换 `react` 及 `react-dom` 相应的版本，再进行发布
-- React15
-- React16
+- React15: [`awesome-react15-swiper`](`https://www.npmjs.com/package/awesome-react15-swiper`)
+- React16: [`awesome-react16-swiper`](`https://www.npmjs.com/package/awesome-react16-swiper`)
 
 ### 本地开发
 ```bash
@@ -18,6 +18,9 @@ npm run start
 
 ### 使用
 ```bash
+import Swiper from 'awesome-react15-swiper';
+import 'awesome-react15-swiper/lib/index.css';
+
 let params = {
     observer: true,
     slideChange: (index) => {
