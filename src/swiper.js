@@ -118,8 +118,8 @@ class Swiper extends Component {
      * 离开时，清除定时器，避免快速轮播多次
      */
     onPageHide() {
-        let { autoPlay, total } = this.props;
-
+        let { autoPlay } = this.props;
+        let { total } = this.state;
         this.pageHideFlag = true;
         if (autoPlay && this.timer && total > 1) {
             this.clearTimer();
@@ -130,8 +130,8 @@ class Swiper extends Component {
      * 进入时，设置轮播动画，如果是自动轮播，设置定时器
      */
     onPageShow() {
-        let { autoPlay, speed, total } = this.props;
-
+        let { autoPlay, speed } = this.props;
+        let { total } = this.state;
         this.pageHideFlag = false;
         if (total > 1) {
             this.setTransitionDuration(speed);

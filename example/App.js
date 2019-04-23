@@ -48,7 +48,7 @@ class App extends Component {
         let params = {
             observer: true,
             slideChange: index => {
-                console.log(index);
+                // console.log(index);
             }
         }
         return (
