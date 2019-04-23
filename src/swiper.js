@@ -28,9 +28,17 @@ class Swiper extends Component {
         this.preventContextMenu();
     }
 
-    componentWillReceiveProps(nextProps) {
+    static getDerivedStateFromProps(nextProps, prevState) {
         let { observer } = nextProps;
-        observer && nextProps.children && this.initSwiper(nextProps.children);
+        if (observer) {
+            let children = nextProps.children;
+            let total = children.length || 0;
+            return {
+                children: nextProps.children.concat(nextProps.children[0]),
+                total: total + 1
+            }
+        }
+        return null
     }
 
     /**
