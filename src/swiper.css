@@ -14,7 +14,7 @@
 .wdt-swiper-slide {
   height: 100%;
   position: relative;
-  float: left;
+  display: inline-block;
   box-sizing: border-box;
 }
 

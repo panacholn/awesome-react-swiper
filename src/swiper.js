@@ -19,28 +19,27 @@ class Swiper extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.compatibility();
         this.listenVisibilityChange();
-    }
-
-    componentDidMount() {
+        this.listenResize();
         this.initSwiper();
         this.checkAutoPlay();
         this.preventContextMenu();
     }
 
-    componentWillReceiveProps() {
-        let { observer } = this.props;
-        observer && this.initSwiper();
+    componentWillReceiveProps(nextProps) {
+        let { observer } = nextProps;
+        observer && nextProps.children && this.initSwiper(nextProps.children);
     }
 
     /**
      * 初始化Swiper
      */
-    initSwiper() {
-        let children = this.props.children;
-        let total = children.length;
+    initSwiper(_children) {
+        let children = _children || this.props.children;
+        if (!children) return;
+        let total = children.length || 0;
         this.setState({
             children: children.concat(children[0]),
             total: total + 1
@@ -102,6 +101,20 @@ class Swiper extends Component {
     }
 
     /**
+     * 监听页面大小变化
+     */
+    listenResize() {
+        window.addEventListener('resize', _ => {
+            let { speed } = this.props;
+            this.setTransitionDuration(0);
+            setTimeout(() => {
+                this.initSwiper();
+                this.setTransitionDuration(speed);
+            }, 30)
+        },false);
+    }
+
+    /**
      * 离开时，清除定时器，避免快速轮播多次
      */
     onPageHide() {
@@ -139,13 +152,11 @@ class Swiper extends Component {
     /**
      * 移动处理
      * @param {*} step       移动的数量，负数代表反方向
-     * @param {*} isTouched  是否触摸
      */
-    move(step, isTouched) {
+    move(step) {
         let { activeIndex, total } = this.state;
         let { slideChange = function() {}, speed, autoPlay } = this.props;
         activeIndex += step;
-
         /*
          * 最后一张回到索引为1的位置（因为末尾追加了第一个slide）
          * 如果从末尾直接跳到开始，动画方向是反的
@@ -161,26 +172,23 @@ class Swiper extends Component {
              * 手动播放动画方向一致的原因：
              *   在`touchMove`监听事件中，会执行`getCurrentLeft`方法，如果发现是最后一个slide，会把它作为第一个slide，所以动画方向一定是一致的
              */
-            !isTouched && autoPlay && (this.$dom.style.left = '0px');
+            autoPlay && (this.$dom.style.left = '0px');
 
             setTimeout(() => {
                 this.setTransitionDuration(speed);
-                this.setState({ activeIndex: 1 }, () => {
-                    slideChange(1);
-                });
+                this.setState({ activeIndex: 1 });
+                slideChange(1);
             }, 30)
             return;
         }
 
-
-        this.setState({ activeIndex }, () => {
-            // 最后一张因为是追加的，所以需要索引置为0
-            if (activeIndex + 1 === total) {
-                slideChange(0);
-            } else {
-                slideChange(activeIndex);
-            }
-        });
+        this.setState({ activeIndex });
+        // 最后一张因为是追加的，所以需要索引置为0
+        if (activeIndex + 1 === total) {
+            slideChange(0);
+        } else {
+            slideChange(activeIndex);
+        }
     }
 
     /**
@@ -188,7 +196,7 @@ class Swiper extends Component {
      * @param {Number} duration 延迟时长
      */
     setTransitionDuration(duration) {
-        this.$dom.style.transitionDuration = duration + 's';
+        this.$dom.style.transitionDuration = duration + 'ms';
     }
 
     /**
@@ -232,12 +240,12 @@ class Swiper extends Component {
     }
 
     render() {
-        let { total, activeIndex } = this.state;
+        let { total, activeIndex, children } = this.state;
         let { pagination, speed } = this.props;
         let style = {
             width: `${total * this.containerWidth}px`,
             left: `${activeIndex * this.containerWidth * -1}px`,
-            transition: `left ${speed}s ease-in-out`
+            transition: `left ${speed}ms ease-in-out`
         }
         let parmas = {
             pagination: pagination,
@@ -253,9 +261,9 @@ class Swiper extends Component {
                     className="wdt-swiper-wrapper"
                     style={style}
                 >
-                    {this.state.children.map((item, index) => {
+                    {children.map((item, index) => {
                         return <div
-                            key={index}
+                            key={`wdt-swiper-slide-${index}`}
                             className="wdt-swiper-slide"
                             style={{width: this.containerWidth}}
                             onTouchStart={touchStart.bind(this, index)}
@@ -272,7 +280,7 @@ class Swiper extends Component {
 }
 
 Swiper.defaultProps = {
-    speed: 0.3,
+    speed: 300,
     delay: 2000,
     distance: 50, // 触摸滑动距离小于distance，则不翻到下一张
     autoPlay: true,

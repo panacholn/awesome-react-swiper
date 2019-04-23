@@ -64,10 +64,10 @@ const Touch = {
         if (Math.abs(moveDistance) < distance) {
             this.setTransitionDuration(speed);
             Touch.stay.bind(this, index, e)();
+            autoPlay && this.autoPlay();
         } else {
             Touch.finally.bind(this, index, e)();
         }
-        autoPlay && this.autoPlay();
     },
 
     /**
@@ -86,9 +86,9 @@ const Touch = {
 
         if (this.pageHideFlag) {
             Touch.stay.bind(this, index, e)();
+            autoPlay && this.autoPlay();
         } else {
             Touch.finally.bind(this, index, e)();
-            autoPlay && this.autoPlay();
         }
     },
 
@@ -114,9 +114,15 @@ const Touch = {
         // 第一个slider向右滑动，则把它当做最后一个slider来设置left
         if (index === 0 && distance > 0) {
             left = this.containerWidth * (total - 1);
+            this.setState({
+                activeIndex: total - 1
+            })
         }
          // 最后一个slider向左滑动，则把它当做第一个slider来设置left
         if (index === total - 1 && distance < 0) {
+            this.setState({
+                activeIndex: 0
+            })
             return `${distance}px`;
         }
         return `${(left - distance) * -1}px`;
@@ -137,24 +143,12 @@ const Touch = {
      * @param {Object} e     事件对象
      */
     finally(index, e) {
-        let { speed } = this.props;
-        let { total } = this.state;
+        let { speed, autoPlay } = this.props;
         let moveDistance = Touch.getMoveDistance(e);
         let step = moveDistance < 0 ? 1 : -1;
-        let _index = index;
-
-        if (index === 0) {
-            if (moveDistance > 0) {
-                _index = total - 1;
-            }
-            this.setState({ activeIndex: _index }, () => {
-                this.setTransitionDuration(speed);
-                this.move(step);
-            })
-        } else {
-            this.setTransitionDuration(speed);
-            this.move(step, true);
-        }
+        this.setTransitionDuration(speed);
+        this.move(step);
+        autoPlay && this.autoPlay();
     }
 }
 

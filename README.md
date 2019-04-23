@@ -6,14 +6,10 @@
  ![image](https://github.com/Johnson-hd/awesome-react-swiper/raw/master/public/show.gif)
 
 ### 版本说明
-本项目分为两个版本，源码相同，只是在发布时，我会更换 `react` 及 `react-dom` 相应的版本，再进行发布<br/>
-<span style="color: #00ffff">*特别需要注意的地方：安装的时候最好指定版本安装，比如 `npm install awesome-react15-swiper@v1.0.1-react15`，因为我是同一套代码发布2个release，2个tag，用的是版本号区分*</span>
-- React15：
-  - 链接：<a href="https://www.npmjs.com/package/awesome-react15-swiper" target="_blank">awesome-react15-swiper</a>
-  - 安装：`npm install awesome-react15-swiper`
-- React16：
-  - 链接：<a href="https://www.npmjs.com/package/awesome-react16-swiper" target="_blank">awesome-react16-swiper</a>
-  - 安装：`npm install awesome-react16-swiper`
+安装时请选择自己需要的版本安装
+- 1.x-stable：`react15` 的版本
+- 2.x-stable：`react16` 的版本
+- 3.x：还未开启，未来新特性，基于更新版的 `react`
 
 ### 本地开发
 ```bash
@@ -23,8 +19,8 @@ npm run start
 
 ### 使用
 ```bash
-import Swiper from 'awesome-react15-swiper';
-import 'awesome-react15-swiper/lib/index.css';
+import Swiper from 'awesome-react-swiper';
+import 'awesome-react-swiper/lib/index.css';
 
 let params = {
     observer: true,
@@ -51,6 +47,12 @@ let params = {
 |autoPlay | Boolean | `true` | 自动播放 |
 |pagination | Boolean | `true` | 分页 |
 |observer | Boolean | `false` | 监视器 |
+
+### Swiper Events
+|事件 | 说明 | 参数 |
+|---|---|---|
+|initSwiper | `初始化Swiper`，数据动态变化时，可以调用该方法重新 `初始化Swiper` | - |
+
 
 ### 未完成的
 - 一个页面有多个 `Swiper` 的情况

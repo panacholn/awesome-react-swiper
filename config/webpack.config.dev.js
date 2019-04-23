@@ -10,6 +10,7 @@ function resolve(dir) {
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
+  devtool: '#source-map',
   entry: {
     index: resolve('example/index.js')
   },
@@ -17,18 +18,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     hot: true,
     port: PORT,
     open: true
-  },
-  module: {
-    rules: [
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
-          }
-        ]
-      }
-    ]
   },
   plugins: [
     new HtmlWebPackPlugin({

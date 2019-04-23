@@ -9,10 +9,10 @@ class SwiperPagination extends Component {
         let { pagination, children, activeIndex, total, click } = this.props;
         return (
             <div className="wdt-swiper-pagination">
-                {pagination && children.map((item, index) => {
+                {pagination && children && children.map((item, index) => {
                     return (
                         <span
-                            key={index}
+                            key={`wdt-swiper-pagination-${index}`}
                             className={
                                 index === activeIndex || activeIndex + 1 === total && index === 0
                                 ? 'wdt-swiper-pagination-bullet-active wdt-swiper-pagination-bullet' :
