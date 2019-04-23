@@ -1,6 +1,7 @@
 {
   "name": "awesome-react-swiper",
   "version": "1.0.0",
+  "title": "Awesome React Swiper",
   "description": "An Awesome React Swiper",
   "author": "johnsonhou<yinglou_hd@163.com>",
   "private": false,
@@ -16,7 +17,13 @@
     "awesome",
     "swiper",
     "react",
-    "移动端"
+    "移动端",
+    "framework",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui"
   ],
   "files": [
     "lib",
