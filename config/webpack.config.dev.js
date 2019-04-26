@@ -2,7 +2,7 @@ const merge = require('webpack-merge');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const baseWebpackConfig = require('./webpack.config.base');
 const path = require('path');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);

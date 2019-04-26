@@ -104,7 +104,7 @@ class Swiper extends Component {
      * 监听页面大小变化
      */
     listenResize() {
-        window.addEventListener('resize', _ => {
+        window.addEventListener('resize', () => {
             let { speed } = this.props;
             this.setTransitionDuration(0);
             setTimeout(() => {
@@ -152,27 +152,16 @@ class Swiper extends Component {
     /**
      * 移动处理
      * @param {*} step       移动的数量，负数代表反方向
+     * @param {*} isTouched  是否触摸
      */
-    move(step) {
+    move(step, isTouched = false) {
         let { activeIndex, total } = this.state;
-        let { slideChange = function() {}, speed, autoPlay } = this.props;
+        let { slideChange, speed, autoPlay } = this.props;
         activeIndex += step;
-        /*
-         * 最后一张回到索引为1的位置（因为末尾追加了第一个slide）
-         * 如果从末尾直接跳到开始，动画方向是反的
-         */
-        if (activeIndex === total) {
-            this.setTransitionDuration(0);
 
-            /*
-             * 自动播放：
-             *   会设置slide的left为0px，再动画到第2个slide，保证了动画的方向一致
-             * 手动播放：
-             *   一定不可以设置为0px，因为会滑动出一部分距离，设置0px会回归0px的位置
-             * 手动播放动画方向一致的原因：
-             *   在`touchMove`监听事件中，会执行`getCurrentLeft`方法，如果发现是最后一个slide，会把它作为第一个slide，所以动画方向一定是一致的
-             */
-            autoPlay && (this.$dom.style.left = '0px');
+        if (activeIndex === total && autoPlay && !isTouched) {
+            this.setTransitionDuration(0);
+            this.$dom.style.left = '0px';
 
             setTimeout(() => {
                 this.setTransitionDuration(speed);
@@ -285,7 +274,8 @@ Swiper.defaultProps = {
     distance: 50, // 触摸滑动距离小于distance，则不翻到下一张
     autoPlay: true,
     pagination: true,
-    observer: false
+    observer: false,
+    slideChange: () => {}
 }
 
 export default Swiper;

@@ -12,8 +12,18 @@ const prodWebpackConfig = merge(baseWebpackConfig, {
     index: resolve('src/swiper.js')
   },
   externals: {
-    'react': 'React',
-    'react-dom' : 'ReactDOM'
+    'react': {
+        root: 'React',
+        commonjs: 'react',
+        commonjs2: 'react',
+        amd: 'react'
+    },
+    'react-dom' : {
+        root: 'ReactDOM',
+        commonjs: 'react-dom',
+        commonjs2: 'react-dom',
+        amd: 'react-dom'
+    }
   },
   output: {
     path: resolve('lib'),

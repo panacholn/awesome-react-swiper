@@ -147,7 +147,7 @@ const Touch = {
         let moveDistance = Touch.getMoveDistance(e);
         let step = moveDistance < 0 ? 1 : -1;
         this.setTransitionDuration(speed);
-        this.move(step);
+        this.move(step, true);
         autoPlay && this.autoPlay();
     }
 }
